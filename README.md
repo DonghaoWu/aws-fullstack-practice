@@ -23,7 +23,7 @@
 
 - #### Click here: [BACK TO NAVIGASTION](https://github.com/DonghaoWu/WebDev-tools-demo/blob/master/README.md)
 
-- [1.1 Brief Route.](#1.1)
+- [1.1 Outline.](#1.1)
 - [1.2 Prerequisites - Part 1](#1.2)
 - [1.3 Prerequisites - Part 2](#1.3)
 - [1.4 Run the app locally.](#1.4)
@@ -33,7 +33,7 @@
 
 ------------------------------------------------------------
 
-### <span id="1.1">`Step1: Brief Route.`</span>
+### <span id="1.1">`Step1: Outline.`</span>
 
 - #### Click here: [BACK TO CONTENT](#1.0)
 
@@ -65,24 +65,10 @@
             artifact: ./www/Archive.zip
     ```
 
-    13. 
-    ```js
-    # ./src/aws.ts
-    //Configure AWS
-
-    if(c.aws_profile !== "DEPLOYED") {
-        var credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
-        AWS.config.credentials = credentials;
-    }
-    ```
-
-    14. package.json
+    13. package.json
     ```json
         "start": "node server.js",
     ```
-
-#### `Comment:`
-1. 
 
 ### <span id="1.2">`Step2: Prerequisites - Part 1.`</span>
 
@@ -118,7 +104,7 @@
 
         1. Install
             ```bash
-            npm install dotenv --save
+            npm i dotenv 
             ```
 
         2. .env file
@@ -139,7 +125,7 @@
             require('dotenv').config();
             ```
 
-        4. Add .env to your .gitignore
+        4. Add .env to your .gitignore file
             ```bash
             .env
             ```
@@ -160,7 +146,7 @@
                 "prod": {
                     "username": "",
                     "password": "",
-                    "database": "udagram_prod",
+                    "database": "",
                     "host": "",
                     "dialect": "postgres"
                 }
@@ -168,12 +154,11 @@
             ```
 
 #### `Comment:`
-1. So far, we should get these things work:
+1. So far, we should get these commands work:
 
     ```diff
     + aws --v
     + eb --version
-    + set up dotenv
     ```
 
 ### <span id="1.3">`Step3: Prerequisites - Part 2`</span>
@@ -194,11 +179,11 @@
         ```
 
     - `important: Remember the credentials settings.`
-        - db indentifier:exercisedb
-        - username:exercisedb
-        - password:exercisedb
-        - database:postgres
-        - endpoint:database-1.c373g1a9htmv.us-east-1.rds.amazonaws.com
+        - db identifier:`exercisedb`
+        - username:`exercisedb`
+        - password:`exercisedb`
+        - database:`postgres`
+        - endpoint:`database-1.c373g1a9htmv.us-east-1.rds.amazonaws.com`
 
     - `set the variables in .env file`
 
@@ -225,7 +210,7 @@
 
     1. Bucket name: exercise-s3-01
     2. encryption key type: SSE-S3
-    3. Bucket CORS policy(Permissions tag/sroll down to buttom).
+    3. Bucket CORS policy. (Permissions tag/sroll down to buttom).
         ```json
         [
             {
@@ -303,15 +288,34 @@
         ```
 
 #### `Comment:`
-1. We get:
+1. We get new assets:
     ```diff
-    + a new database:
-    + a new S3 bucket:exercise-s3-01
+    + a new database identifier: exercisedb
+    + a new S3 bucket: exercise-s3-01
     + a new s3 policy: exercise-policy-01
     + a new user group: exercise-group-01
     + a new user: exercise-user-01
     + a new EC2 s3 role: exercise-dev-ec2-01
-    + cat ~/.aws/credentials
+    ```
+
+2. Set these variables:
+
+    ```json
+    POSTGRE_USERNAME=exercisedb
+    POSTGRE_PASSWORD=exercisedb
+    POSTGRE_DATABASE=postgres
+    POSTGRE_HOST=exercisedb.c373g1a9htmv.us-east-1.rds.amazonaws.com
+    DIALECT=postgres
+    AWS_REGION=us-east-1
+    AWS_PROFILE=default
+    AWS_MEDIA_BUCKET=exercise-s3-01
+    ```
+
+3. Get these commands work:
+
+    ```bash
+    $ cat ~/.aws/credentials
+    $ cat ~/.aws/config
     ```
     
 ### <span id="1.4">`Step4: Run the app locally.`</span>
@@ -346,14 +350,6 @@
 
                 res.send(updatedItem[1][0].dataValues);
             });
-        ```
-
-    - ./src/aws.ts
-        ```diff
-        + if(c.aws_profile !== "DEPLOYED") {
-            let credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
-            AWS.config.credentials = credentials;
-        + }
         ```
 
 2. Run the app
@@ -409,7 +405,7 @@
 
     6. Use the put signed url to upload an image.(Put)
         ```diff
-        + https://exercise-s3-20210507.s3.amazonaws.com/test?X-Amz-Algorithm=...
+        + https://exercise-s3-01.s3.amazonaws.com/test?X-Amz-Algorithm=...
         + Headers: Content-Type : image/jpeg
         + body: binary
         + select an image
@@ -440,13 +436,13 @@
         $ Y # node.js
         $ 2 # Node.js 12
         $ Y # SSH
-        $ 3 # create new KeyPair
+        $ Y # KeyPair
         ```
 
     3. Add a new code in file `config.yml`
         ```yml
         deploy:
-        artifact: ./www/Archive.zip
+            artifact: ./www/Archive.zip
         ```
 
     - config.yml example
@@ -506,7 +502,7 @@
         + Add Environment properties
         ```
 
-        - AWS_PROFILE: DEPLOYED
+        - :gem:`AWS_PROFILE: DEPLOYED`
 
     2. Add S3 access to EB role.
 
