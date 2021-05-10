@@ -30,6 +30,7 @@
 - [1.5 Deploy with Elastic beanstalk.](#1.5)
 - [1.6 Add environment variables in EB console.](#1.6)
 - [1.7 Debugging.](#1.7)
+- [1.8 Cleaning up.](#1.7)
 
 ------------------------------------------------------------
 
@@ -523,6 +524,21 @@
     </p>
 
     --------------------------------------------------
+
+### <span id="1.8">`Step8: Cleaning up.`</span>
+
+- #### Click here: [BACK TO CONTENT](#1.0)
+
+    1. Delete sources list:
+    ```diff
+    - EB application
+    - S3 bucket
+    - RDS database
+    - EC2 instances
+    - Policy
+    - Group
+    - User
+    ```
 
 - 本章用到的全部资料：
 
