@@ -355,9 +355,9 @@
 
 2. Run the app
 
-  ```bash
-  $ npm run dev
-  ```
+    ```bash
+    $ npm run dev
+    ```
 
 3. test the routes in postman.
 
